@@ -1,6 +1,12 @@
+<<<<<<< HEAD
 ## Hadoop Map-Reduce for financial analytics
 
 
+=======
+## Hadoop Map-Reduce Example in Java
+JON TEST
+**Get up and running in less than 5 minutes**
+>>>>>>> b586d65b2261d09ae48f70bc1b9f0fc16bdbc361
 
 ### Overview
 This program demonstrates Hadoop's Map-Reduce concept in Java using a very simple example. The input is raw data files listing earthquakes by region, magnitude and other information. 
