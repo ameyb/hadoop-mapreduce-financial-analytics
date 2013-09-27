@@ -1,49 +1,6 @@
-<<<<<<< HEAD
-## Hadoop Map-Reduce for financial analytics
-
 
 =======
-## Hadoop Map-Reduce Example in Java
-JON TEST
-**Get up and running in less than 5 minutes**
->>>>>>> b586d65b2261d09ae48f70bc1b9f0fc16bdbc361
-
-### Overview
-This program demonstrates Hadoop's Map-Reduce concept in Java using a very simple example. The input is raw data files listing earthquakes by region, magnitude and other information. 
-
-> nc,71920701,1,”Saturday, January 12, 2013 19:43:18 UTC”,38.7865,-122.7630,**1.5**,1.10,27,**“Northern California”**
-
-The fields in bold are magnitude of the quake and name of region where the reading was taken, respectively. The _goal_ is to process all input files to find the maximum magnitude quake reading for every region listed. The output is in the form:
-
-        "region_name"      <maximum magnitude of earthquake recorded> 
-
-The raw data files are in the `input/` folder. You will notice that there is a compressed file named `input.tar.gz`. This is to demonstrate the concept that Hadoop MapReduce can automatically uncompress the archive to process the files.
-
-### Instructions for Setting Up Hadoop
-1. Download Hadoop 1.1.1 binary. [Mirror](http://mirror.csclub.uwaterloo.ca/apache/hadoop/common/hadoop-1.1.1/hadoop-1.1.1.tar.gz)
-
-
-2. Extract it to a folder on your computer:
-        
-        $ tar xvfz hadoop-1.1.1.tar.gz
-
-3. Setup JAVA_HOME environment variable to point to the directory where Java is installed. For my Mac OS X, I did the following:
-
-        $ export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Versions/1.6.0/Home
-
- Note: If you are running Lion, you may want to update the JAVA_HOME to point to `java_home` command which outputs Java's home directory, that is,
-
-        $ export JAVA_HOME=$(/usr/libexec/java_home)
-
-4. Setup HADOOP_INSTALL environment variable to point the directory where you extracted hadoop binary in step 2:
-
-        $ export HADOOP_INSTALL=/Users/umermansoor/Documents/hadoop-1.1.1
-
-5. Edit the PATH environment variable:
-
-        $ export PATH=$PATH:$HADOOP_INSTALL/bin
-
-> Or you can add these variables to your standard shell script. For example, checkout my Mac OSX's [`~/.bash_profile`](https://gist.github.com/4525814)
+## Hadoop Map-Reduce for Financial Analytics
 
 ### Instructions for Running the Sample
 1. Clone the project:
