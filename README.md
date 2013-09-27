@@ -1,5 +1,5 @@
 ## Hadoop Map-Reduce Example in Java
-NICK TEST
+JON TEST
 **Get up and running in less than 5 minutes**
 
 ### Overview
