@@ -2,12 +2,12 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.umermansoor</groupId>
-  <artifactId>hadoopex</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <groupId>com.gsihadoop</groupId>
+  <artifactId>hadoopfin</artifactId>
+  <version>1.0</version>
   <packaging>jar</packaging>
 
-  <name>Map Reduce Example</name>
+  <name>Hadoop Map Reduce Financial Analytics</name>
   <url>http://maven.apache.org</url>
 
   <properties>
@@ -27,6 +27,18 @@
       <artifactId>hadoop-core</artifactId>
       <version>1.1.1</version>
     </dependency>
-
   </dependencies>
+  <build>
+  <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.1</version>
+        <configuration>
+          <source>1.6</source>
+          <target>1.6</target>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 </project>
