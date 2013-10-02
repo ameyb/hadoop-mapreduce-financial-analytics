@@ -6,7 +6,7 @@ import java.io.IOException;
 import org.apache.hadoop.io.Text;
 
 /**
- * This is the main Mapper class. 
+ * This is the main Reducer class. 
  * 
  * @author ameyb
  */
@@ -25,14 +25,14 @@ public class FinanceReducer extends
     @Override
     public void reduce(Text key, Iterable<DoubleWritable> values, 
             Context context) throws IOException, InterruptedException {
-        // Write your logic here
+
         // Standard algorithm for finding the max value
-        double maxMagnitude = Double.MIN_VALUE;
+        double High52week = Double.MIN_VALUE;
         for (DoubleWritable value : values) {
-            maxMagnitude = Math.max(maxMagnitude, value.get());
+        	High52week = Math.max(High52week, value.get());
         }
         
-        context.write(key, new DoubleWritable(maxMagnitude));
+        context.write(key, new DoubleWritable(High52week));
     }
 }
 

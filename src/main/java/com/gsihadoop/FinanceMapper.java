@@ -4,7 +4,6 @@ import org.apache.hadoop.io.DoubleWritable;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
-
 import java.io.IOException;
 
 /**
@@ -15,7 +14,7 @@ import java.io.IOException;
 public class FinanceMapper extends 
         Mapper<LongWritable, Text, Text, DoubleWritable> 
 {
-
+//	 public enum Counters { DataRowsWritten, DataInputErrors };
     /**
      * The `Mapper` method.
      * @param key - Input key - The line offset in the file - ignored.
@@ -27,23 +26,24 @@ public class FinanceMapper extends
     @Override
     public void map(LongWritable key, Text value, Context context) throws 
             IOException, InterruptedException {
-    	// Write your logic here
-        String[] line = value.toString().split(",", 12); // 14 for usgs
 
-        // Ignore invalid lines
-        if (line.length != 12) {
-            System.out.println("- " + line.length);
-            return;
-        }
-
-        // The output `key` is the name of the region
-        String outputKey = line[11]; // 10 for usgs
-
-        // The output `value` is the magnitude of the earthquake
-        double outputValue = Double.parseDouble(line[8]); // 4 for usgs
+        String line = value.toString();
         
-        // Record the output in the Context object
-        context.write(new Text(outputKey), new DoubleWritable(outputValue));
+        StockData record = StockData.parse(line);
+
+        if(record != null && !record.exchange.equals("exchange")){
+        	
+        	String year = record.date.substring(0, 4);
+        	String outputKey = record.exchange + " " + record.stock_symbol + " " + year;
+        	double outputValue = Double.parseDouble(record.stock_price_close);
+        	
+            // Record the output in the Context object
+        	context.write(new Text(outputKey), new DoubleWritable(outputValue));
+        } else {
+//        	context.getCounter(Counters.DataInputErrors).increment(1);
+        }
+        
+//        context.getCounter(Counters.DataRowsWritten).increment(1);
     }
 }
 
