@@ -20,7 +20,7 @@ import org.apache.hadoop.util.*;
 public class App extends Configured implements Tool
 {
 //	private static final Log LOG = LogFactory.getLog(App.class);
-	private String inputPath, outputPath, tableName = "";
+	private String inputPath, outputPath, functionName, functionDate, tableName = "";
     
 	/**
      * Application entry point.
@@ -39,9 +39,9 @@ public class App extends Configured implements Tool
 		Configuration conf = new Configuration();
 		
 		String[] otherArgs = (new GenericOptionsParser(conf, args)).getRemainingArgs();
-        if (otherArgs.length != 2) 
+        if (otherArgs.length < 2) 
         {
-            System.err.println("Usage: com.gsihadoop.App <input source location/HDFS> <hdfs output path>");
+            System.err.println("Usage: com.gsihadoop.App <input source location/HDFS> <hdfs output path> <function>");
             ToolRunner.printGenericCommandUsage(System.out);
             System.exit(-1);
         }
@@ -49,16 +49,23 @@ public class App extends Configured implements Tool
         // conf.setStrings("","");
         this.inputPath = otherArgs[0];
         this.outputPath = otherArgs[1];
-
+	this.functionName = otherArgs[2];
+	this.functionDate = otherArgs[3];
 //        Job job = Job.getInstance(conf);
         Job job = new Job(conf);
         job.setJarByClass(App.class);
         job.setJobName("Hadoop Financial Analytics");
         
         // Set the Mapper and Reducer classes
-        job.setMapperClass(FinanceMapper.class);
+        if(functionName.equalsIgnoreCase("low") && functionDate != ""){
+	conf.setStrings("date", this.functionDate);
+	job.setMapperClass(FinanceMapper52WeekLowWithDate.class);
+	job.setReducerClass(FinanceReducer52WeekLowWithDate.class);
+	}
+	else {
+	job.setMapperClass(FinanceMapper.class);
         job.setReducerClass(FinanceReducer.class);
-	
+	}
         // Specify the type of output keys and values
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(DoubleWritable.class);
