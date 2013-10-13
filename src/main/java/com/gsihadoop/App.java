@@ -13,7 +13,7 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 import org.apache.hadoop.util.*;
 /**
- * Hadoop Financial Analytics Project
+ * Hadoop Financial Analytics Project v2
  * https://github.com/ameyb/hadoop-mapreduce-financial-analytics
  * @author ameyb
  */
