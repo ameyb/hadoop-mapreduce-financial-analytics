@@ -7,7 +7,7 @@ import org.apache.hadoop.mapreduce.Mapper;
 import java.io.IOException;
 
 /**
- * This is the main Mapper class. 
+ * This is the main Mapper class template. 
  * 
  * @author ameyb
  */

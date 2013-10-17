@@ -6,7 +6,7 @@ import java.io.IOException;
 import org.apache.hadoop.io.Text;
 
 /**
- * This is the main Reducer class. 
+ * This is the main Reducer class template. 
  * 
  * @author ameyb
  */
