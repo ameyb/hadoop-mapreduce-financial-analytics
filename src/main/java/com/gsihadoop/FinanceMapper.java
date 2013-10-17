@@ -35,7 +35,7 @@ public class FinanceMapper extends
         	
         	String year = record.getDate().substring(0, 4);
         	String outputKey = record.getExchange() + " " + record.getStock_symbol() + " " + year;
-        	double outputValue = Double.parseDouble(record.getStock_price_close());
+        	double outputValue = record.getStock_price_close();
         	
             // Record the output in the Context object
         	context.write(new Text(outputKey), new DoubleWritable(outputValue));

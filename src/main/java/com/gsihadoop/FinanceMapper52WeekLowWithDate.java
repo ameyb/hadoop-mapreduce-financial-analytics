@@ -68,8 +68,7 @@ public class FinanceMapper52WeekLowWithDate extends
 				int year = recordDate.get(Calendar.YEAR);
 				String outputKey = record.getExchange() + " " + record.getStock_symbol()
 						+ " " + year;
-				double outputValue = Double
-						.parseDouble(record.getStock_price_close());
+				double outputValue = record.getStock_price_close();
 
 				// Record the output in the Context object
 				context.write(new Text(outputKey), new DoubleWritable(
