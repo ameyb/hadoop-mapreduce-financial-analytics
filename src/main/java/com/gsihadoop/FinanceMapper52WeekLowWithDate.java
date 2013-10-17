@@ -53,11 +53,11 @@ public class FinanceMapper52WeekLowWithDate extends
 
 		StockData record = StockData.parse(line);
 
-		if (record != null && !record.exchange.equals("exchange")) {
+		  if(record != null && !record.getExchange().equals("exchange")){
 			Calendar recordDate = Calendar.getInstance();
 
 			try {
-				recordDate.setTime(formatter.parse(record.date));
+				recordDate.setTime(formatter.parse(record.getDate()));
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
@@ -66,10 +66,10 @@ public class FinanceMapper52WeekLowWithDate extends
 					&& (recordDate.compareTo(previousDate) >= 0)) {
 
 				int year = recordDate.get(Calendar.YEAR);
-				String outputKey = record.exchange + " " + record.stock_symbol
+				String outputKey = record.getExchange() + " " + record.getStock_symbol()
 						+ " " + year;
 				double outputValue = Double
-						.parseDouble(record.stock_price_close);
+						.parseDouble(record.getStock_price_close());
 
 				// Record the output in the Context object
 				context.write(new Text(outputKey), new DoubleWritable(

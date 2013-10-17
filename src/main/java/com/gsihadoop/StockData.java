@@ -90,4 +90,11 @@ public class StockData {
 		this.stock_price_low = stock_price_low;
 	}
 		
+	public double getStock_price_close() {
+		return stock_price_close;
+	}
+
+	public void setStock_price_close(double stock_price_close) {
+		this.stock_price_close = stock_price_close;
+	}
 }

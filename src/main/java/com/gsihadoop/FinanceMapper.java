@@ -31,11 +31,11 @@ public class FinanceMapper extends
         
         StockData record = StockData.parse(line);
 
-        if(record != null && !record.exchange.equals("exchange")){
+        if(record != null && !record.getExchange().equals("exchange")){
         	
-        	String year = record.date.substring(0, 4);
-        	String outputKey = record.exchange + " " + record.stock_symbol + " " + year;
-        	double outputValue = Double.parseDouble(record.stock_price_close);
+        	String year = record.getDate().substring(0, 4);
+        	String outputKey = record.getExchange() + " " + record.getStock_symbol() + " " + year;
+        	double outputValue = Double.parseDouble(record.getStock_price_close());
         	
             // Record the output in the Context object
         	context.write(new Text(outputKey), new DoubleWritable(outputValue));
