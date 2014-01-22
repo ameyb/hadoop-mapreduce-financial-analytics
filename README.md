@@ -1,6 +1,6 @@
 =======
 ## Hadoop Map-Reduce for Financial Analytics
-v2
+v3
 ### Instructions for Running the code
 1. Clone the project:
 
