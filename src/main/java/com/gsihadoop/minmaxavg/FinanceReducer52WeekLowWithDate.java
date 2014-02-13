@@ -1,4 +1,4 @@
-package com.gsihadoop;
+package com.gsihadoop.minmaxavg;
 
 import org.apache.hadoop.io.DoubleWritable;
 import org.apache.hadoop.mapreduce.Reducer;

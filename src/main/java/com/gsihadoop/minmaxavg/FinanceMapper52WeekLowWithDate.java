@@ -1,4 +1,4 @@
-package com.gsihadoop;
+package com.gsihadoop.minmaxavg;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -11,10 +11,12 @@ import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
+import com.gsihadoop.utils.StockData;
+
 public class FinanceMapper52WeekLowWithDate extends
 		Mapper<LongWritable, Text, Text, DoubleWritable> {
 
-	// public enum Counters { DataRowsWritten, DataInputErrors };
+	 public enum Counters { DataRowsWritten, DataInputErrors };
 	/**
 	 * The `Mapper` method.
 	 * 
@@ -77,9 +79,9 @@ public class FinanceMapper52WeekLowWithDate extends
 			}
 
 		} else {
-			// context.getCounter(Counters.DataInputErrors).increment(1);
+			context.getCounter(Counters.DataInputErrors).increment(1);
 		}
 
-		// context.getCounter(Counters.DataRowsWritten).increment(1);
+		context.getCounter(Counters.DataRowsWritten).increment(1);
 	}
 }

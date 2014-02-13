@@ -1,4 +1,4 @@
-package src.test.java.com.gsihadoop;
+package com.gsihadoop.test;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

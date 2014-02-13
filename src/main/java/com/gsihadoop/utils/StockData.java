@@ -1,4 +1,4 @@
-package com.gsihadoop;
+package com.gsihadoop.utils;
 
 import java.text.ParseException;
 
@@ -29,24 +29,30 @@ public class StockData {
 		stock_price_adj_close = 0.00;
 	}
 	
-	public static StockData parse(String csvRow) throws ArrayIndexOutOfBoundsException, NumberFormatException, ParseException{
+	public static StockData parse(String csvRow){
 		StockData record = new StockData();
 		String[] values = csvRow.split(",", -1);
 
 		/*if (values.length != 9) {
 			return null;
 		}*/
-
-		record.setExchange(values[0].trim());
-		record.setStock_symbol(values[1].trim());
-		record.setDate(values[2].trim());
-		record.stock_price_high = Double.parseDouble(values[4].trim());
-		record.stock_price_low = Double.parseDouble(values[5].trim());
-		record.stock_price_open = Double.parseDouble(values[3].trim());
-		record.stock_price_close = Double.parseDouble(values[6].trim());
-		record.stock_volume = Integer.parseInt(values[7].trim());
-		record.stock_price_adj_close = Double.parseDouble(values[8].trim());
-
+			
+		try {
+			record.setExchange(values[0].trim());
+			record.setStock_symbol(values[1].trim());
+			record.setDate(values[2].trim());
+			record.stock_price_high = Double.parseDouble(values[4].trim());
+			record.stock_price_low = Double.parseDouble(values[5].trim());
+			record.stock_price_open = Double.parseDouble(values[3].trim());
+			record.stock_price_close = Double.parseDouble(values[6].trim());
+			record.stock_volume = Integer.parseInt(values[7].trim());
+			record.stock_price_adj_close = Double.parseDouble(values[8].trim());
+		} catch (ArrayIndexOutOfBoundsException e) {
+			e.printStackTrace();
+		} catch(NumberFormatException e){
+			e.printStackTrace();
+		} 
+		
 		return record;
 	}
 	
