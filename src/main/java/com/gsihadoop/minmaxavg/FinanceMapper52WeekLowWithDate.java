@@ -48,7 +48,7 @@ public class FinanceMapper52WeekLowWithDate extends
 		}
 
 		previousDate.set(Calendar.YEAR, userDate.get(Calendar.YEAR) - 1);
-		previousDate.set(Calendar.MONTH, userDate.get(Calendar.MONTH+1));
+		previousDate.set(Calendar.MONTH, userDate.get(Calendar.MONTH));
 		previousDate.set(Calendar.DATE, userDate.get(Calendar.DATE));
 
 		String line = value.toString();
