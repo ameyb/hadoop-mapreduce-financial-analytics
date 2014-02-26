@@ -18,7 +18,7 @@ public class DateUtilities {
 		if (dateString.matches("([0-9]{4})-([0-9]{1,2})-([0-9]{1,2})")){
 			return FORMAT_FULL.parse(dateString);
 		} else {
-			return new Date();
+			return null;
 		}
 		
 	}

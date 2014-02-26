@@ -14,7 +14,7 @@ import org.apache.hadoop.mapreduce.Mapper;
 import com.gsihadoop.utils.DateUtilities;
 import com.gsihadoop.utils.StockData;
 
-public class FinanceMapper52WeekLowWithDate extends
+public class FinanceMapper52WeekHighWithDate extends
 		Mapper<LongWritable, Text, Text, DoubleWritable> {
 
 	 public enum Counters { DataRowsWritten, DataInputErrors };
@@ -35,7 +35,6 @@ public class FinanceMapper52WeekLowWithDate extends
 			throws IOException, InterruptedException {
 
 		Configuration conf = context.getConfiguration();
-
 		String userDateString = conf.get("date");
 
 		Calendar userDate = Calendar.getInstance();
@@ -62,11 +61,10 @@ public class FinanceMapper52WeekLowWithDate extends
 				recordDate.setTime(DateUtilities.getDate(record.getDate()));
 			} catch (ParseException e) {
 				e.printStackTrace();
-			} catch (NullPointerException e){
-				e.printStackTrace();
 			}
 
-			if ((recordDate.compareTo(userDate) <= 0) && (recordDate.compareTo(previousDate) >= 0)) {
+			if ((recordDate.compareTo(userDate) <= 0)
+					&& (recordDate.compareTo(previousDate) >= 0)) {
 
 				int year = recordDate.get(Calendar.YEAR);
 				String outputKey = record.getExchange() + " " + record.getStock_symbol()

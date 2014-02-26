@@ -1,0 +1,23 @@
+<?xml version="1.0"?> 
+<configuration>  
+	<property>    
+		<name>inputPath</name>    
+		<value></value>    
+		<description>Input Path</description>  
+	</property> 
+	<property>    
+		<name>outputPath</name>    
+		<value></value>    
+		<description>Output Path</description>  
+	</property> 
+	<property>    
+		<name>functionDate</name>    
+		<value></value>    
+		<description>Function Date</description>  
+	</property> 
+	<property>    
+		<name>sp500ListPath</name>    
+		<value></value>    
+		<description>Path to SP500 Company List</description>  
+	</property> 
+</configuration>
