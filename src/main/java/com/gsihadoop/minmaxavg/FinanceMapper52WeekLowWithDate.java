@@ -11,6 +11,7 @@ import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
+import com.gsihadoop.utils.DateUtilities;
 import com.gsihadoop.utils.StockData;
 
 public class FinanceMapper52WeekLowWithDate extends
@@ -34,7 +35,6 @@ public class FinanceMapper52WeekLowWithDate extends
 			throws IOException, InterruptedException {
 
 		Configuration conf = context.getConfiguration();
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
 		String userDateString = conf.get("date");
 
@@ -42,14 +42,14 @@ public class FinanceMapper52WeekLowWithDate extends
 		Calendar previousDate = Calendar.getInstance();
 
 		try {
-			userDate.setTime(formatter.parse(userDateString));
+			userDate.setTime(DateUtilities.getDate(userDateString));
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 
-		previousDate.set(Calendar.YEAR, userDate.YEAR - 1);
-		previousDate.set(Calendar.MONTH, userDate.MONTH);
-		previousDate.set(Calendar.DATE, userDate.DATE);
+		previousDate.set(Calendar.YEAR, userDate.get(Calendar.YEAR) - 1);
+		previousDate.set(Calendar.MONTH, userDate.get(Calendar.MONTH+1));
+		previousDate.set(Calendar.DATE, userDate.get(Calendar.DATE));
 
 		String line = value.toString();
 
@@ -59,13 +59,12 @@ public class FinanceMapper52WeekLowWithDate extends
 			Calendar recordDate = Calendar.getInstance();
 
 			try {
-				recordDate.setTime(formatter.parse(record.getDate()));
+				recordDate.setTime(DateUtilities.getDate(record.getDate()));
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
 
-			if ((recordDate.compareTo(userDate) <= 0)
-					&& (recordDate.compareTo(previousDate) >= 0)) {
+			if ((recordDate.compareTo(userDate) <= 0) && (recordDate.compareTo(previousDate) >= 0)) {
 
 				int year = recordDate.get(Calendar.YEAR);
 				String outputKey = record.getExchange() + " " + record.getStock_symbol()
@@ -73,8 +72,7 @@ public class FinanceMapper52WeekLowWithDate extends
 				double outputValue = record.getStock_price_close();
 
 				// Record the output in the Context object
-				context.write(new Text(outputKey), new DoubleWritable(
-						outputValue));
+				context.write(new Text(outputKey), new DoubleWritable(outputValue));
 
 			}
 
