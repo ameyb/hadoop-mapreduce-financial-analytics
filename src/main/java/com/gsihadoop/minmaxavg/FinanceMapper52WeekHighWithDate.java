@@ -14,7 +14,7 @@ import org.apache.hadoop.mapreduce.Mapper;
 import com.gsihadoop.utils.DateUtilities;
 import com.gsihadoop.utils.StockData;
 
-public class FinanceMapper52WeekLowWithDate extends
+public class FinanceMapper52WeekHighWithDate extends
 		Mapper<LongWritable, Text, Text, DoubleWritable> {
 
 	 public enum Counters { DataRowsWritten, DataInputErrors };
@@ -35,7 +35,6 @@ public class FinanceMapper52WeekLowWithDate extends
 			throws IOException, InterruptedException {
 
 		Configuration conf = context.getConfiguration();
-
 		String userDateString = conf.get("date");
 
 		Calendar userDate = Calendar.getInstance();
@@ -62,19 +61,14 @@ public class FinanceMapper52WeekLowWithDate extends
 				recordDate.setTime(DateUtilities.getDate(record.getDate()));
 			} catch (ParseException e) {
 				e.printStackTrace();
-			} catch (NullPointerException e){
-				e.printStackTrace();
 			}
 
-			if ((recordDate.compareTo(userDate) <= 0) && (recordDate.compareTo(previousDate) >= 0)) {
+			if ((recordDate.compareTo(userDate) <= 0)
+					&& (recordDate.compareTo(previousDate) >= 0)) {
 
-				// Including the year in the key causes the output to find a minimum for the
-				// users date year AND a minimum for the previous date.  For now don't include year in key.
-				
-				//int year = recordDate.get(Calendar.YEAR);
-				//String outputKey = record.getExchange() + " " + record.getStock_symbol() + " " + year;
-				
-				String outputKey = record.getExchange() + " " + record.getStock_symbol() + " ";
+				int year = recordDate.get(Calendar.YEAR);
+				String outputKey = record.getExchange() + " " + record.getStock_symbol()
+						+ " " + year;
 				double outputValue = record.getStock_price_close();
 
 				// Record the output in the Context object
@@ -83,9 +77,9 @@ public class FinanceMapper52WeekLowWithDate extends
 			}
 
 		} else {
-			//context.getCounter(Counters.DataInputErrors).increment(1);
+			context.getCounter(Counters.DataInputErrors).increment(1);
 		}
 
-		//context.getCounter(Counters.DataRowsWritten).increment(1);
+		context.getCounter(Counters.DataRowsWritten).increment(1);
 	}
 }
