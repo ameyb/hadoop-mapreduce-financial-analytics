@@ -47,9 +47,9 @@ public class FinanceMapper52WeekLowWithDate extends
 			e.printStackTrace();
 		}
 
-		previousDate.set(Calendar.YEAR, userDate.YEAR - 1);
-		previousDate.set(Calendar.MONTH, userDate.MONTH);
-		previousDate.set(Calendar.DATE, userDate.DATE);
+		previousDate.set(Calendar.YEAR, userDate.get(Calendar.YEAR) - 1);
+		previousDate.set(Calendar.MONTH, userDate.get(Calendar.MONTH));
+		previousDate.set(Calendar.DATE, userDate.get(Calendar.DATE));
 
 		String line = value.toString();
 
@@ -67,9 +67,13 @@ public class FinanceMapper52WeekLowWithDate extends
 			if ((recordDate.compareTo(userDate) <= 0)
 					&& (recordDate.compareTo(previousDate) >= 0)) {
 
-				int year = recordDate.get(Calendar.YEAR);
-				String outputKey = record.getExchange() + " " + record.getStock_symbol()
-						+ " " + year;
+				// Including the year in the key causes the output to find a minimum for the
+				// users date year AND a minimum for the previous date.  For now don't include year in key.
+				
+				//int year = recordDate.get(Calendar.YEAR);
+				//String outputKey = record.getExchange() + " " + record.getStock_symbol() + " " + year;
+				
+				String outputKey = record.getExchange() + " " + record.getStock_symbol() + " ";
 				double outputValue = record.getStock_price_close();
 
 				// Record the output in the Context object
@@ -79,9 +83,9 @@ public class FinanceMapper52WeekLowWithDate extends
 			}
 
 		} else {
-			context.getCounter(Counters.DataInputErrors).increment(1);
+			//context.getCounter(Counters.DataInputErrors).increment(1);
 		}
 
-		context.getCounter(Counters.DataRowsWritten).increment(1);
+		//context.getCounter(Counters.DataRowsWritten).increment(1);
 	}
 }
