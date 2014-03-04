@@ -72,8 +72,13 @@ public class App extends Configured implements Tool {
 		this.outputPath = otherArgs[1];
 		this.functionName = otherArgs[2];
 		this.functionDate = otherArgs[3];
-		this.sp500ListPath = otherArgs[4];
-
+		
+		//Causes ArrayIndexOutOfBoundsException if not working right 
+		try{
+			this.sp500ListPath = otherArgs[4];
+		}catch(ArrayIndexOutOfBoundsException aiobe){
+			
+		}
 		conf.set("date", this.functionDate);
 		
 //		conf.addResource("configuration.xml");
