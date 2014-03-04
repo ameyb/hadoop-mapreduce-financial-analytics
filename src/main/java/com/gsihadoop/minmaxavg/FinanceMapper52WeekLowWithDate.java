@@ -69,12 +69,12 @@ public class FinanceMapper52WeekLowWithDate extends
 			if ((recordDate.compareTo(userDate) <= 0) && (recordDate.compareTo(previousDate) >= 0)) {
 
 				// Including the year in the key causes the output to find a minimum for the
-				// users date year AND a minimum for the previous date.  For now don't include year in key.
+				// userDate year AND a minimum for the previousDate.  For now don't include year in key.
 				
 				//int year = recordDate.get(Calendar.YEAR);
 				//String outputKey = record.getExchange() + " " + record.getStock_symbol() + " " + year;
 				
-				String outputKey = record.getExchange() + " " + record.getStock_symbol() + " ";
+				String outputKey = record.getExchange() + " " + record.getStock_symbol();
 				double outputValue = record.getStock_price_close();
 
 				// Record the output in the Context object
@@ -83,9 +83,9 @@ public class FinanceMapper52WeekLowWithDate extends
 			}
 
 		} else {
-			//context.getCounter(Counters.DataInputErrors).increment(1);
+			context.getCounter(Counters.DataInputErrors).increment(1);
 		}
 
-		//context.getCounter(Counters.DataRowsWritten).increment(1);
+		context.getCounter(Counters.DataRowsWritten).increment(1);
 	}
 }
